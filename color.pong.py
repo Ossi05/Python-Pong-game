@@ -56,7 +56,7 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write(f"Player A: {score_a} Player B: {score_b}", align="center", font=("Courier", 24, "normal"))
+pen.write(f"Player 1: {score_a} Player 2: {score_b}", align="center", font=("Courier", 24, "normal"))
 
 
 #Function
@@ -110,44 +110,50 @@ while True:
         ball.sety(290)
         ball.dy *= -1
         winsound.PlaySound('bounce.wav', winsound.SND_FILENAME | winsound.SND_ASYNC)
-        vari = random.choice(colors)
-
-        while (vari == ball_color or vari == paddle_a.color() or vari == paddle_b.color() or vari == wn.bgcolor()):
-            vari = random.choice(colors)
-
-
-        wn.bgcolor(vari)
-        ball_color = random.choice(colors)
-        while vari == ball_color:
-            ball_color = random.choice(colors)
+        new_bg_color = random.choice(colors)
+        while (new_bg_color == ball_color or new_bg_color == paddle_a.color() or new_bg_color == paddle_b.color() or new_bg_color == wn.bgcolor()):
+            new_bg_color = random.choice(colors)
 
         
-        ball.color(ball_color)
+        new_ball_color = random.choice(colors)
+        while (new_ball_color == paddle_a.color() or new_ball_color == paddle_b.color() or new_ball_color == new_bg_color):
+            new_ball_color = random.choice(colors)
+
+       
+        wn.bgcolor(new_bg_color)
+        ball.color(new_ball_color)
 
             
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
         winsound.PlaySound('bounce.wav', winsound.SND_FILENAME | winsound.SND_ASYNC)
-        vari = random.choice(colors)
-
-        while (vari == ball_color or vari == paddle_a.color() or vari == paddle_b.color() or vari == wn.bgcolor()):
-            vari = random.choice(colors)
         
-        ball_color = random.choice(colors)
-        while vari == ball_color:
-            ball_color = random.choice(colors)
+        new_bg_color = random.choice(colors)
+        while (new_bg_color == ball_color or new_bg_color == paddle_a.color() or new_bg_color == paddle_b.color() or new_bg_color == wn.bgcolor()):
+            new_bg_color = random.choice(colors)
 
-        wn.bgcolor(vari)
-        ball.color(ball_color)
         
+        new_ball_color = random.choice(colors)
+        while (new_ball_color == paddle_a.color() or new_ball_color == paddle_b.color() or new_ball_color == new_bg_color):
+            new_ball_color = random.choice(colors)
+
+       
+        wn.bgcolor(new_bg_color)
+        ball.color(new_ball_color)
    
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
         score_a += 1
         pen.clear()
-        pen.write(f"Player A: {score_a} Player B: {score_b}", align="center", font=("Courier", 24, "normal"))
+        pen.write(f"Player 1: {score_a} Player 2: {score_b}", align="center", font=("Courier", 24, "normal"))
+        if score_a == 5:
+            print("Player 1 won")
+            break
+        elif score_b == 5:
+            print("Player 2 won")
+            break
 
 
     if ball.xcor() < -390:
@@ -155,7 +161,13 @@ while True:
         ball.dx *= -1
         score_b += 1
         pen.clear()
-        pen.write(f"Player A: {score_a} Player B: {score_b}", align="center", font=("Courier", 24, "normal"))
+        pen.write(f"Player 1: {score_a} Player 2: {score_b}", align="center", font=("Courier", 24, "normal"))
+        if score_a == 5:
+            print("Player 1 won")
+            break
+        elif score_b == 5:
+            print("Player 2 won")
+            break
 
         if ball.xcor() == 0 and ball.ycor() == 0:
             firstDirection = random.randint(0,3)
@@ -178,10 +190,10 @@ while True:
         
         
         paddle_b.color(ball_color)
-        vari = random.choice(colors)
-        while vari == ball_color:
-            vari = random.choice(colors)
-        ball_color = vari
+        ball_color = random.choice(colors)
+        while new_ball_color == ball_color:
+            ball_color = random.choice(colors)
+        
         
         ball.color(ball_color)
 
@@ -192,9 +204,9 @@ while True:
         winsound.PlaySound('bounce.wav', winsound.SND_FILENAME | winsound.SND_ASYNC)
         
         paddle_a.color(ball_color)
-        vari = random.choice(colors)
-        while vari == ball_color:
-            vari = random.choice(colors)
-        ball_color = vari
+        ball_color = random.choice(colors)
+        while new_ball_color == ball_color:
+            ball_color = random.choice(colors)
+        
         
         ball.color(ball_color)
